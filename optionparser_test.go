@@ -30,3 +30,18 @@ func TestDefaultHandler(t *testing.T) {
 		t.Error("Expected default handler to be called")
 	}
 }
+
+func TestDefaultHandlerWithNoOptions(t *testing.T) {
+	f := Init()
+	defaultHandler := false
+	f.HandleOption("notused", func(args []string) {
+		t.Error("Option should of not been called")
+	})
+	f.SetDefaultHandler(func() {
+		defaultHandler = true
+	})
+	f.Parse([]string{})
+	if !defaultHandler {
+		t.Error("Expected default handler to be called")
+	}
+}

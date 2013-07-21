@@ -28,6 +28,7 @@ func (f *Flags) SetDefaultHandler(handler func()) {
 
 func (f *Flags) Parse(args []string) {
 	if len(args) == 0 {
+		f.DefaultHandler()
 		return
 	}
 	for _, option := range f.Options {
